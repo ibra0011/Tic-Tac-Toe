@@ -40,43 +40,45 @@ function updateCell(cell,index) {
 
 function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
-statusText.textContent = `${currentPlayer}'s turn`;
+    statusText.textContent = `${currentPlayer}'s turn`;
 }
 
 function checkWinner() {
-let roundwon = false;
+    let roundwon = false;
 
-for(let i = 0 ; i < winconditions.length ; i++ ) {
-    const condition = winconditions[i];
-    const cellA = options[condition[0]];
-    const cellB = options[condition[1]];
-    const cellC = options[condition[2]];
+    for(let i = 0; i < winConditions.length; i++) {
+        const condition = winconditions[i];
+        const cellA = options[condition[0]];
+        const cellB = options[condition[1]];
+        const cellC = options[condition[2]];
+    
+        if(cellA == "" || cellB == "" || cellC == "" ) {
+            continue;
+        }
+        
+        if (cellA == cellB && cellB == cellC ) {
+            roundwon = true;
+            break;
+        }
+    }
+    
+    if(roundwon) {
+        statusText.textContent = `${currentPlayer} wins!`;
+        running = false;
+    }
+    else if(!options.includes("")) {
+        statusText.textContent = `Draw!`;
+        running = false;
+    }
+    else {
+        chengePlayer();
+    }
+}
 
-    if(cellA == "" || cellB == "" || cellC == "" ) {
-        continue;
-    }
-    if (cellA == cellB && cellB == cellC ) {
-        roundwon = true;
-        break;
-    }
-}
-if(roundwon) {
-    statusText.textContent = `${currentPlayer} wins!`;
-    running = false;
-}
-else if(!options.includes("")) {
-    statusText.textContent = `Draw!`;
-    running = false;
-}
-else {
-    chengePlayer();
-}
-}
 function restertGame() {
     currentPlayer = "X";
     options = ["", "", "", "", "", "", "", "", ""];
     statusText.textContent = `${currentPlayer}'s turn`;
-    cells.forEach(cell=>cell.textContent = "");
+    cells.forEach(cell => cell.textContent = "");
     running = true;
-
 }
