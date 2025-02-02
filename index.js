@@ -1,7 +1,7 @@
 const cells = document.querySelectorAll(".cell");
 const statusText = document.querySelector("#statusText");
 const restartBtn= document.querySelector("#restartBtn");
-const winconditions =[
+const winConditions = [
     [0,1,2],
     [3,4,5],
     [6,7,8],
@@ -13,28 +13,31 @@ const winconditions =[
 ];
 let options = ["", "", "", "", "", "", "", "", ""];
 let currentPlayer = "X";
-let running =false;
+let running = false;
 
 initializeGame();
 
-function initializeGame(){
-    cells.forEach(cell=>cell.addEventListener("click",cellcliecked));
+function initializeGame() {
+    cells.forEach(cell=> cell.addEventListener("click", cellClicked));
     restartBtn.addEventListener("click", restertGame);
-    statusText.textContent= `${currentPlayer}'s turn`;
+    statusText.textContent = `${currentPlayer}'s turn`;
     running = true;
 }
-function cellcliecked(){
- const cellIndex = this.getAttribute("cellIndex");
- if( options[cellIndex]!=""|| !running){
-    return;
- }
- updatecell(this,cellIndex);
- checkwinner();
+
+function cellClicked() {
+    const cellIndex = this.getAttribute("cellIndex");
+    if (options[cellIndex] !="" || !running) {
+        return;
+     }
+    updateCell(this, cellIndex);
+    checkWinner();
 }
-function updatecell(cell,index){
-  options[index]=currentPlayer;
-  cell.textContent=currentPlayer;
+
+function updateCell(cell,index) {
+    options[index] = currentPlayer;
+    cell.textContent = currentPlayer;
 }
+
 function chengePlayer(){
 currentPlayer =(currentPlayer=="X")? "O" :"X";
 statusText.textContent=`${currentPlayer}'s turn`;
