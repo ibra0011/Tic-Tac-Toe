@@ -23,22 +23,27 @@ function initializeGame(){
     statusText.textContent= `${currentPlayer}'s turn`;
     running = true;
 }
+
 function cellcliecked(){
  const cellIndex = this.getAttribute("cellIndex");
- if( options[cellIndex]!=""|| !running){
+    if( options[cellIndex]!="" || !running)
+        {
     return;
- }
+        }
  updatecell(this,cellIndex);
  checkwinner();
 }
+
 function updatecell(cell,index){
   options[index]=currentPlayer;
   cell.textContent=currentPlayer;
 }
+
 function chengePlayer(){
 currentPlayer =(currentPlayer=="X")? "O" :"X";
 statusText.textContent=`${currentPlayer}'s turn`;
 }
+
 function checkwinner(){
 let roundwon =false;
 
@@ -68,6 +73,7 @@ else{
     chengePlayer();
 }
 }
+
 function restertGame(){
     currentPlayer ="X";
     options = ["", "", "", "", "", "", "", "", ""];
